@@ -6,9 +6,9 @@ import Head from 'next/head';
  * Replace these values with your actual HubSpot portal and form IDs
  */
 const HUBSPOT_CONFIG = {
-  portalId: 'YOUR_PORTAL_ID', // e.g., '12345678'
-  unlockFormId: 'YOUR_UNLOCK_FORM_ID', // e.g., 'a1b2c3d4-e5f6-...'
-  notifyFormId: 'YOUR_NOTIFY_FORM_ID', // e.g., 'x9y8z7w6-v5u4-...'
+  portalId: '24383351', // e.g., '12345678'
+  unlockFormId: "2cd3821f-cd9c-47fd-a415-7364b51a2859", // e.g., 'a1b2c3d4-e5f6-...'
+  notifyFormId: "ba532670-9e2b-4bec-8387-73b1be607e5c", // e.g., 'x9y8z7w6-v5u4-...'
 };
 
 export default function BuyersGuide() {
