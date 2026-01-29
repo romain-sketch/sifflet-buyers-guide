@@ -25,7 +25,7 @@ export default function BuyersGuide() {
       theme: 'The Trust Crisis',
       tagline: 'Why data quality is a boardroom problem',
       available: true,
-      releaseDate: 'Jan 29',
+      releaseDate: 'Feb 4',
       chapters: [
         { 
           num: '01', 
@@ -50,7 +50,7 @@ export default function BuyersGuide() {
       theme: 'What Observability Really Means',
       tagline: 'Beyond monitoring, toward context',
       available: false,
-      releaseDate: 'Feb 12',
+      releaseDate: 'Feb 25',
       chapters: [
         { 
           num: '03', 
@@ -75,7 +75,7 @@ export default function BuyersGuide() {
       theme: 'From Alerts to Action',
       tagline: 'Use cases that actually work',
       available: false,
-      releaseDate: 'Feb 26',
+      releaseDate: 'Mar 18',
       chapters: [
         { 
           num: '05', 
@@ -100,7 +100,7 @@ export default function BuyersGuide() {
       theme: 'The AI Imperative',
       tagline: 'Why observability is your AI readiness foundation',
       available: false,
-      releaseDate: 'Mar 12',
+      releaseDate: 'April 8',
       chapters: [
         { 
           num: '07', 
@@ -125,7 +125,7 @@ export default function BuyersGuide() {
       theme: 'Operational Maturity',
       tagline: 'From chaos to predictable performance',
       available: false,
-      releaseDate: 'Mar 26',
+      releaseDate: 'Apr 29',
       chapters: [
         { 
           num: '09', 
@@ -150,7 +150,7 @@ export default function BuyersGuide() {
       theme: 'Making the Case',
       tagline: 'ROI, evaluation, and choosing your platform',
       available: false,
-      releaseDate: 'Apr 9',
+      releaseDate: 'May 20',
       chapters: [
         { 
           num: '11', 
@@ -399,21 +399,30 @@ export default function BuyersGuide() {
                 </p>
 
                 <button
-                  onClick={() => {
-                    setGateContext({ chapter: releases[0].chapters[0], release: releases[0] });
-                    setShowGateModal(true);
-                  }}
-                  style={{
-                    background: '#E91E63',
-                    color: '#fff',
-                    border: 'none',
-                    padding: '14px 28px',
-                    borderRadius: '8px',
-                    fontSize: '15px',
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                  }}
-                >Get the Guide →</button>
+  onClick={() => {
+    // Find the latest available release
+    const latestAvailable = releases.filter(r => r.available).pop();
+    if (latestAvailable) {
+      const firstChapter = latestAvailable.chapters[0];
+      document.getElementById(`chapter-${firstChapter.num}`)?.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'center' 
+      });
+      // Expand the first chapter of that part
+      setExpandedChapter(firstChapter.num);
+    }
+  }}
+  style={{
+    background: '#E91E63',
+    color: '#fff',
+    border: 'none',
+    padding: '14px 28px',
+    borderRadius: '8px',
+    fontSize: '15px',
+    fontWeight: 600,
+    cursor: 'pointer',
+  }}
+>Get the Guide →</button>
 
                 {isSubscribed && (
                   <span style={{ marginLeft: '12px', color: '#81C784', fontSize: '14px' }}>✓ You&apos;re in!</span>
