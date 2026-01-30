@@ -6,9 +6,15 @@ import Head from 'next/head';
  * Replace these values with your actual HubSpot portal and form IDs
  */
 const HUBSPOT_CONFIG = {
-  portalId: '24383351', // e.g., '12345678'
-  unlockFormId: "2cd3821f-cd9c-47fd-a415-7364b51a2859", // e.g., 'a1b2c3d4-e5f6-...'
-  notifyFormId: "ba532670-9e2b-4bec-8387-73b1be607e5c", // e.g., 'x9y8z7w6-v5u4-...'
+  portalId: '24383351',
+  partFormIds: {
+    1: 'FORM_ID_PART_1',
+    2: 'FORM_ID_PART_2',
+    3: 'FORM_ID_PART_3',
+    4: 'FORM_ID_PART_4',
+    5: 'FORM_ID_PART_5',
+    6: 'FORM_ID_PART_6',
+  }
 };
 
 export default function BuyersGuide() {
@@ -188,24 +194,29 @@ export default function BuyersGuide() {
   }, []);
 
   // Render HubSpot form in modal
-  useEffect(() => {
-    if (showGateModal && hubspotLoaded && formContainerRef.current && gateContext && window.hbspt) {
-      formContainerRef.current.innerHTML = '';
-      
-      const isAvailable = gateContext.release?.available;
-      const formId = isAvailable ? HUBSPOT_CONFIG.unlockFormId : HUBSPOT_CONFIG.notifyFormId;
-      
-      window.hbspt.forms.create({
-        portalId: HUBSPOT_CONFIG.portalId,
-        formId: formId,
-        target: '#hubspot-form-container',
-        onFormSubmitted: function() {
-          setIsSubscribed(true);
-          setTimeout(() => setShowGateModal(false), 1500);
-        },
-      });
+ useEffect(() => {
+  if (showGateModal && hubspotLoaded && formContainerRef.current && gateContext && window.hbspt) {
+    formContainerRef.current.innerHTML = '';
+    
+    const partNumber = gateContext.release?.id;
+    const formId = HUBSPOT_CONFIG.partFormIds[partNumber];
+    
+    if (!formId) {
+      formContainerRef.current.innerHTML = '<p style="text-align:center;color:#999;">Form not configured for this part.</p>';
+      return;
     }
-  }, [showGateModal, hubspotLoaded, gateContext]);
+    
+    window.hbspt.forms.create({
+      portalId: HUBSPOT_CONFIG.portalId,
+      formId: formId,
+      target: '#hubspot-form-container',
+      onFormSubmitted: function() {
+        setIsSubscribed(true);
+        setTimeout(() => setShowGateModal(false), 1500);
+      },
+    });
+  }
+}, [showGateModal, hubspotLoaded, gateContext]);
 
   // Handle deep linking
   useEffect(() => {
