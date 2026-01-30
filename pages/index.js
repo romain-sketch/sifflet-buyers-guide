@@ -8,12 +8,12 @@ import Head from 'next/head';
 const HUBSPOT_CONFIG = {
   portalId: '24383351',
   partFormIds: {
-    1: 'FORM_ID_PART_1',
-    2: 'FORM_ID_PART_2',
-    3: 'FORM_ID_PART_3',
-    4: 'FORM_ID_PART_4',
-    5: 'FORM_ID_PART_5',
-    6: 'FORM_ID_PART_6',
+    1: "2cd3821f-cd9c-47fd-a415-7364b51a2859",
+    2: "ddb44128-77b4-491c-b5d3-e21f2cc42567",
+    3: "6d0bb0a4-d9cb-46c5-a37a-788ce600c04c",
+    4: "1b11cc21-b5f5-4409-ac5f-cc4249e6dc31",
+    5: "c4a34616-871e-4fac-ba7d-8dee7dd95aa4",
+    6: "aa88604a-2842-468c-bc5b-4e229d3aa6da",
   }
 };
 
