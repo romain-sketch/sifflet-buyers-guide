@@ -231,15 +231,22 @@ export default function BuyersGuide() {
     }
   }, []);
 
-  const handleChapterAccess = (chapter, release) => {
-    if (isSubscribed && release.available) {
-      // Replace with your actual chapter URL or PDF
-      window.open(`/chapters/chapter-${chapter.num}.pdf`, '_blank');
-    } else {
-      setGateContext({ chapter, release });
-      setShowGateModal(true);
-    }
-  };
+const handleChapterAccess = (chapter, release) => {
+  if (isSubscribed && release.available) {
+    const pdfUrls = {
+      1: 'https://24383351.fs1.hubspotusercontent-na1.net/hubfs/24383351/Sifflet%20Buyers%20Guide%20Part%201.pdf',
+      2: 'https://24383351.fs1.hubspotusercontent-na1.net/hubfs/24383351/Sifflet%20Buyers%20Guide%20Part%202.pdf',
+      3: 'https://24383351.fs1.hubspotusercontent-na1.net/hubfs/24383351/Sifflet%20Buyers%20Guide%20Part%203.pdf',
+      4: 'https://24383351.fs1.hubspotusercontent-na1.net/hubfs/24383351/Sifflet%20Buyers%20Guide%20Part%204.pdf',
+      5: 'https://24383351.fs1.hubspotusercontent-na1.net/hubfs/24383351/Sifflet%20Buyers%20Guide%20Part%205.pdf',
+      6: 'https://24383351.fs1.hubspotusercontent-na1.net/hubfs/24383351/Sifflet%20Buyers%20Guide%20Part%206.pdf',
+    };
+    window.open(pdfUrls[release.id], '_blank');
+  } else {
+    setGateContext({ chapter, release });
+    setShowGateModal(true);
+  }
+};
 
   const toggleExpand = (num) => {
     setExpandedChapter(expandedChapter === num ? null : num);
