@@ -273,10 +273,10 @@ const handleChapterAccess = (chapter, release) => {
       alignItems: 'center',
       justifyContent: 'space-between',
     },
-    hero: {
-      background: 'linear-gradient(135deg, #0D0D0D 0%, #1A1A2E 100%)',
-      color: '#fff',
-      padding: '70px 40px 80px',
+hero: {
+  background: 'linear-gradient(135deg, #0D0D0D 0%, #1A1A2E 100%)',
+  color: '#fff',
+  padding: '50px 20px 60px',
       position: 'relative',
       overflow: 'hidden',
     },
@@ -390,95 +390,91 @@ const handleChapterAccess = (chapter, release) => {
         </nav>
 
         {/* Hero */}
-        <header style={styles.hero}>
-          <div style={styles.grid} />
-          <div style={{ maxWidth: '1100px', margin: '0 auto', position: 'relative' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 320px', gap: '60px', alignItems: 'center' }}>
-              <div>
-                <span style={{
-                  display: 'inline-block',
-                  background: '#E91E63',
-                  color: '#fff',
-                  padding: '5px 12px',
-                  fontSize: '11px',
-                  fontWeight: 600,
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  borderRadius: '4px',
-                  marginBottom: '24px',
-                }}>2026 Edition</span>
-                
-                <h1 style={{ fontSize: 'clamp(32px, 4.5vw, 48px)', fontWeight: 700, lineHeight: 1.15, margin: 0, letterSpacing: '-0.02em' }}>
-                  The Data <span style={{ color: '#E91E63' }}>Observability</span><br />Buyer&apos;s Guide
-                </h1>
+{/* Hero */}
+<header style={styles.hero}>
+  <div style={styles.grid} />
+  <div style={{ maxWidth: '1100px', margin: '0 auto', position: 'relative' }}>
+    <div className="hero-grid">
+      <div>
+        <span style={{
+          display: 'inline-block',
+          background: '#E91E63',
+          color: '#fff',
+          padding: '5px 12px',
+          fontSize: '11px',
+          fontWeight: 600,
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+          borderRadius: '4px',
+          marginBottom: '24px',
+        }}>2026 Edition</span>
+        
+        <h1 style={{ fontSize: 'clamp(28px, 5vw, 48px)', fontWeight: 700, lineHeight: 1.15, margin: 0, letterSpacing: '-0.02em' }}>
+          The Data <span style={{ color: '#E91E63' }}>Observability</span><br />Buyer&apos;s Guide
+        </h1>
 
-                <p style={{ fontSize: '16px', lineHeight: 1.65, maxWidth: '480px', opacity: 0.75, marginTop: '20px', marginBottom: '28px' }}>
-                  6 parts. 12 chapters. Released over 12 weeks. Everything you need to evaluate, justify, and implement data observability—from first principles to platform selection.
-                </p>
+        <p style={{ fontSize: '16px', lineHeight: 1.65, maxWidth: '480px', opacity: 0.75, marginTop: '20px', marginBottom: '28px' }}>
+          6 parts. 12 chapters. Released over 12 weeks. Everything you need to evaluate, justify, and implement data observability—from first principles to platform selection.
+        </p>
 
-                <button
-  onClick={() => {
-    // Find the latest available release
-    const latestAvailable = releases.filter(r => r.available).pop();
-    if (latestAvailable) {
-      const firstChapter = latestAvailable.chapters[0];
-      document.getElementById(`chapter-${firstChapter.num}`)?.scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'center' 
-      });
-      // Expand the first chapter of that part
-      setExpandedChapter(firstChapter.num);
-    }
-  }}
-  style={{
-    background: '#E91E63',
-    color: '#fff',
-    border: 'none',
-    padding: '14px 28px',
-    borderRadius: '8px',
-    fontSize: '15px',
-    fontWeight: 600,
-    cursor: 'pointer',
-  }}
->Get the Guide →</button>
+        <button
+          onClick={() => {
+            const latestAvailable = releases.filter(r => r.available).pop();
+            if (latestAvailable) {
+              const firstChapter = latestAvailable.chapters[0];
+              document.getElementById(`chapter-${firstChapter.num}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              setExpandedChapter(firstChapter.num);
+            }
+          }}
+          style={{
+            background: '#E91E63',
+            color: '#fff',
+            border: 'none',
+            padding: '14px 28px',
+            borderRadius: '8px',
+            fontSize: '15px',
+            fontWeight: 600,
+            cursor: 'pointer',
+          }}
+        >Get the Guide →</button>
 
-                {isSubscribed && (
-                  <span style={{ marginLeft: '12px', color: '#81C784', fontSize: '14px' }}>✓ You&apos;re in!</span>
-                )}
-              </div>
+        {isSubscribed && (
+          <span style={{ marginLeft: '12px', color: '#81C784', fontSize: '14px' }}>✓ You&apos;re in!</span>
+        )}
+      </div>
 
-              {/* Progress Card */}
-              <div style={{
-                background: 'rgba(255,255,255,0.04)',
-                border: '1px solid rgba(255,255,255,0.08)',
-                borderRadius: '16px',
-                padding: '28px',
-              }}>
-                <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', opacity: 0.5, marginBottom: '12px' }}>Your Progress</div>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '6px' }}>
-                  <span style={{ fontSize: '42px', fontWeight: 300, lineHeight: 1 }}>{availableCount}</span>
-                  <span style={{ fontSize: '16px', opacity: 0.4 }}>/ 6 parts</span>
-                </div>
-                <div style={{ fontSize: '13px', opacity: 0.6, marginBottom: '20px' }}>available now</div>
-                <div style={{ height: '6px', background: 'rgba(255,255,255,0.08)', borderRadius: '3px', overflow: 'hidden', marginBottom: '24px' }}>
-                  <div style={{ width: `${(availableCount / 6) * 100}%`, height: '100%', background: '#E91E63', borderRadius: '3px' }} />
-                </div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                  {releases.map((r) => (
-                    <div key={r.id} style={{
-                      background: r.available ? '#E91E63' : 'rgba(255,255,255,0.06)',
-                      padding: '4px 10px',
-                      borderRadius: '12px',
-                      fontSize: '11px',
-                      fontWeight: 500,
-                      opacity: r.available ? 1 : 0.5,
-                    }}>{r.available ? `Part ${r.id} ✓` : r.releaseDate}</div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </header>
+      {/* Progress Card */}
+      <div className="progress-card" style={{
+        background: 'rgba(255,255,255,0.04)',
+        border: '1px solid rgba(255,255,255,0.08)',
+        borderRadius: '16px',
+        padding: '24px',
+      }}>
+        <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', opacity: 0.5, marginBottom: '12px' }}>Your Progress</div>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '6px' }}>
+          <span style={{ fontSize: '42px', fontWeight: 300, lineHeight: 1 }}>{availableCount}</span>
+          <span style={{ fontSize: '16px', opacity: 0.4 }}>/ 6 parts</span>
+        </div>
+        <div style={{ fontSize: '13px', opacity: 0.6, marginBottom: '20px' }}>available now</div>
+        <div style={{ height: '6px', background: 'rgba(255,255,255,0.08)', borderRadius: '3px', overflow: 'hidden', marginBottom: '24px' }}>
+          <div style={{ width: `${(availableCount / 6) * 100}%`, height: '100%', background: '#E91E63', borderRadius: '3px' }} />
+        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+          {releases.map((r) => (
+            <div key={r.id} style={{
+              background: r.available ? '#E91E63' : 'rgba(255,255,255,0.06)',
+              padding: '4px 10px',
+              borderRadius: '12px',
+              fontSize: '11px',
+              fontWeight: 500,
+              opacity: r.available ? 1 : 0.5,
+            }}>{r.available ? `Part ${r.id} ✓` : r.releaseDate}</div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
 
         {/* Subscribed Banner */}
         {isSubscribed && (
@@ -488,7 +484,7 @@ const handleChapterAccess = (chapter, release) => {
         )}
 
         {/* Main Content */}
-        <main style={{ maxWidth: '1100px', margin: '0 auto', padding: '50px 40px 100px' }}>
+        <main style={{ maxWidth: '1100px', margin: '0 auto', padding: '50px 20px 100px' }}>
           {releases.map((release) => (
             <div key={release.id} style={{ marginBottom: '50px' }}>
               {/* Release Header */}
@@ -642,6 +638,29 @@ const handleChapterAccess = (chapter, release) => {
         * { box-sizing: border-box; }
         body { margin: 0; -webkit-font-smoothing: antialiased; }
         button:hover { opacity: 0.9; }
+        /* Responsive Hero */
+.hero-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+@media (min-width: 768px) {
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 60px;
+    align-items: center;
+  }
+}
+.progress-card {
+  width: 100%;
+  max-width: 400px;
+}
+@media (min-width: 768px) {
+  .progress-card {
+    max-width: none;
+  }
+}
         
         /* HubSpot Form Styling */
         #hubspot-form-container .hs-form { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important; }
